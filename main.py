@@ -95,7 +95,7 @@ while True:
         messages.append({ "role": "assistant", "content": json.dumps(parsed_output) })
 
         if parsed_output.get("step") == "plan":
-            print(f"🧠: {parsed_output.get("content")}")
+            print(f"🧠: {parsed_output.get('content')}")
             continue
         
         if parsed_output.get("step") == "action":
@@ -108,5 +108,5 @@ while True:
                 continue
         
         if parsed_output.get("step") == "output":
-            print(f"🤖: {parsed_output.get("content")}")
+            print(f"🤖: {parsed_output.get('content')}")
             break
