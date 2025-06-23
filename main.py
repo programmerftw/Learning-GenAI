@@ -29,6 +29,18 @@ def get_weather(city: str):
         return f"The weather in {city} is {response.text}."
     return "Something went wrong"
 
+def get_crypto_price(crypto: str):
+    # TODO!: Do an actual API Call
+    print("🔨 Tool Called: get_crypto_price", crypto)
+    
+    url = f"https://api.coingecko.com/api/v3/simple/price?ids={crypto}&vs_currencies=usd"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        data = response.json()
+        return f"The current price of {crypto} is ${data[crypto]['usd']}."
+    return "Something went wrong"
+
 
 
 
@@ -40,6 +52,10 @@ avaiable_tools = {
     "run_command": {
         "fn": run_command,
         "description": "Takes a command as input to execute on system and returns ouput"
+    },
+    "get_crypto_price": {
+        "fn": get_crypto_price,
+        "description": "Takes a cryptocurrency name as input and returns the current price in USD"
     }
 }
 
@@ -66,6 +82,7 @@ system_prompt = f"""
     Available Tools:
     - get_weather: Takes a city name as an input and returns the current weather for the city
     - run_command: Takes a command as input to execute on system and returns ouput
+    - get_crypto_price: Takes a cryptocurrency name as input and returns the current price in USD
     
     Example:
     User Query: What is the weather of new york?
